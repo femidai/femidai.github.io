@@ -23,7 +23,7 @@
             --border-radius: 8px;
             --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
             --transition: all 0.3s ease;
-        }
+        } ::-webkit-scrollbar{width:0px;}
         
         * {margin: 0;padding: 0;box-sizing: border-box;}
         
@@ -72,17 +72,11 @@
         h2.forensic { border-color: var(--color-accent-forensic); }
         h2.court { border-color: var(--color-accent-court); }
         
-        h3 {
-            font-size: 1.4rem;
-            color: var(--color-secondary);
-            margin: 1.8rem 0 1rem;
-        }
+        h3 {font-size: 1.4rem;color: var(--color-secondary);margin: 1.8rem 0 1rem;}
         
         h4 {
-            font-size: 1.1rem;
-            color: var(--color-text-light);
-            margin: 1.2rem 0 0.5rem;
-            font-weight: 600;
+            font-size: 1.1rem;color: var(--color-text-light);
+            margin: 1.2rem 0 0.5rem;font-weight: 600;
         }
         
         .section {
@@ -149,9 +143,7 @@
             background: linear-gradient(45deg, #edf2f7, #e2e8f0);
         }
         
-        .concept-img:hover {
-            border-color: var(--color-accent-forensic);
-        }
+        .concept-img:hover {border-color: var(--color-accent-forensic);}
         
         .concept-img.large {height: 300px;}
         
@@ -193,47 +185,20 @@
             border-top: 1px solid #e2e8f0;
         }
         
-        .color-scheme {
-            display: flex;
-            gap: 0.5rem;
-            margin: 1rem 0;
-        }
-        
-        .color-chip {
-            width: 40px;
-            height: 40px;
-            border-radius: 4px;
-        }
-        
+        .color-scheme {display: flex; gap: 0.5rem; margin: 1rem 0;}     
+        .color-chip {width: 40px;height: 40px; border-radius: 4px;}
         .chip-1 { background: var(--color-primary); }
         .chip-2 { background: var(--color-secondary); }
         .chip-3 { background: var(--color-accent-forensic); }
         .chip-4 { background: var(--color-accent-court); }
         
         @media (max-width: 768px) {
-            body {
-                padding: 10px;
-            }
-            
-            .section {
-                padding: 1.5rem;
-            }
-            
-            h1 {
-                font-size: 2rem;
-            }
-            
-            .concept-grid, .role-grid, .tech-stack {
-                grid-template-columns: 1fr;
-            }
-            
-            .concept-img {
-                height: 180px;
-            }
-            
-            .concept-img.large {
-                height: 250px;
-            }
+            body {padding: 10px;}
+            .section {padding: 1.5rem;}
+            h1 {font-size: 2rem;}
+            .concept-grid, .role-grid, .tech-stack {grid-template-columns: 1fr;}
+            .concept-img {height: 180px;}
+            .concept-img.large {height: 250px;}
         }
     </style>
 </head>
