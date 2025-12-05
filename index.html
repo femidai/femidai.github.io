@@ -1,1 +1,521 @@
-
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Дизайн-документ: Digital Forensics & Supreme Court Simulator</title>
+    <style>
+        :root {
+            --color-primary: #1a365d;
+            --color-secondary: #2d3748;
+            --color-accent-forensic: #4fd1c7;
+            --color-accent-court: #ed8936;
+            --color-bg-light: #f7fafc;
+            --color-bg-dark: #1a202c;
+            --color-text: #2d3748;
+            --color-text-light: #718096;
+            --border-radius: 8px;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            line-height: 1.6;
+            color: var(--color-text);
+            background-color: var(--color-bg-light);
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+            color: white;
+            padding: 2.5rem;
+            border-radius: var(--border-radius);
+            margin-bottom: 2.5rem;
+            box-shadow: var(--shadow);
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(to right, var(--color-accent-forensic), var(--color-accent-court));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 1.5rem;
+        }
+        
+        h2 {
+            font-size: 1.8rem;
+            color: var(--color-primary);
+            margin: 2.5rem 0 1.2rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid;
+        }
+        
+        h2.forensic { border-color: var(--color-accent-forensic); }
+        h2.court { border-color: var(--color-accent-court); }
+        
+        h3 {
+            font-size: 1.4rem;
+            color: var(--color-secondary);
+            margin: 1.8rem 0 1rem;
+        }
+        
+        h4 {
+            font-size: 1.1rem;
+            color: var(--color-text-light);
+            margin: 1.2rem 0 0.5rem;
+            font-weight: 600;
+        }
+        
+        .section {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+        
+        .section:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+        
+        .concept-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+        
+        .concept-card {
+            border: 1px solid #e2e8f0;
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            background: var(--color-bg-light);
+            transition: var(--transition);
+        }
+        
+        .concept-card:hover {
+            border-color: var(--color-accent-forensic);
+        }
+        
+        .role-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+        
+        .role-card {
+            border-left: 4px solid;
+            padding: 1.2rem;
+            background: var(--color-bg-light);
+            border-radius: 0 var(--border-radius) var(--border-radius) 0;
+        }
+        
+        .role-1 { border-color: #4fd1c7; }
+        .role-2 { border-color: #4299e1; }
+        .role-3 { border-color: #ed8936; }
+        .role-4 { border-color: #9f7aea; }
+        .role-5 { border-color: #48bb78; }
+        .role-6 { border-color: #ed64a6; }
+        
+        /* Стили для изображений */
+        .concept-img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: var(--border-radius);
+            border: 2px solid #cbd5e0;
+            margin: 1rem 0;
+            transition: var(--transition);
+            background: linear-gradient(45deg, #edf2f7, #e2e8f0);
+        }
+        
+        .concept-img:hover {
+            border-color: var(--color-accent-forensic);
+        }
+        
+        .concept-img.large {
+            height: 300px;
+        }
+        
+        .tech-stack {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+        
+        .tech-item {
+            background: var(--color-primary);
+            color: white;
+            padding: 1rem;
+            border-radius: var(--border-radius);
+            text-align: center;
+            font-weight: 600;
+        }
+        
+        .game-mode {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+        
+        .mode-card {
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            background: var(--color-bg-light);
+            border-left: 4px solid var(--color-primary);
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 3rem;
+            padding: 2rem;
+            color: var(--color-text-light);
+            border-top: 1px solid #e2e8f0;
+        }
+        
+        .color-scheme {
+            display: flex;
+            gap: 0.5rem;
+            margin: 1rem 0;
+        }
+        
+        .color-chip {
+            width: 40px;
+            height: 40px;
+            border-radius: 4px;
+        }
+        
+        .chip-1 { background: var(--color-primary); }
+        .chip-2 { background: var(--color-secondary); }
+        .chip-3 { background: var(--color-accent-forensic); }
+        .chip-4 { background: var(--color-accent-court); }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            .section {
+                padding: 1.5rem;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .concept-grid, .role-grid, .tech-stack {
+                grid-template-columns: 1fr;
+            }
+            
+            .concept-img {
+                height: 180px;
+            }
+            
+            .concept-img.large {
+                height: 250px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>«Цифровой Криминалист & Верховный Суд»</h1>
+        <p class="subtitle">Гибрид иммерсивного симулятора и стратегии в реальном времени</p>
+        <p>Документ для наполнения арт-концепциями и визуальными материалами</p>
+    </header>
+    
+    <!-- Секция 1: Общая концепция -->
+    <section class="section" id="concept">
+        <h2>1. Общая концепция проекта</h2>
+        <p><strong>Жанр:</strong> Гибрид иммерсивного симулятора и стратегии в реальном времени</p>
+        <p><strong>Ключевая идея:</strong> Игроки оркестрируют данные вместо традиционных игровых действий. Цель — довести дело до понятного и убедительного обоснования в формате "Верховного Суда".</p>
+        
+        <h4>Цветовая схема проекта</h4>
+        <div class="color-scheme">
+            <div class="color-chip chip-1" title="Основной цвет"></div>
+            <div class="color-chip chip-2" title="Вторичный цвет"></div>
+            <div class="color-chip chip-3" title="Акцент Цифрового Криминалиста"></div>
+            <div class="color-chip chip-4" title="Акцент Верховного Суда"></div>
+        </div>
+        
+        <h4>Концепт-арты: Общее визуальное направление</h4>
+        <div class="concept-grid">
+            <div class="concept-card">
+                <h4>Стиль интерфейса: FUI (Fantasy User Interface)</h4>
+                <img src="https://femidai.github.io/img/characters/Role_Forensic_Analyst_1.png" alt="FUI Interface Style" class="concept-img">
+                <p>Темная сетка, голографические элементы, неоновая подсветка данных</p>
+            </div>
+            
+            <div class="concept-card">
+                <h4>Игровое пространство: Вид от первого лица</h4>
+                <img src="https://femidai.github.io/img/characters/Role_Forensic_Analyst_1.png" alt="First Person Lab View" class="concept-img">
+                <p>Лаборатория с множеством экранов, панелей управления, 3D-визуализацией данных</p>
+            </div>
+            
+            <div class="concept-card">
+                <h4>Стратегический вид: Карта дел</h4>
+                <img src="https://femidai.github.io/img/characters/Role_Forensic_Analyst_1.png" alt="Strategic Case Map" class="concept-img">
+                <p>Обзорный интерфейс управления несколькими делами, ресурсами, временными окнами</p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Секция 2: Две надстройки -->
+    <section class="section" id="overlays">
+        <h2 class="forensic">2. Надстройка: "Цифровой Криминалист"</h2>
+        <p><strong>Уровень:</strong> Лаборатория / поле</p>
+        
+        <div class="concept-grid">
+            <div class="concept-card">
+                <h4>Модуль: Аудиофоноскопия</h4>
+                <img src="https://femidai.github.io/img/characters/Role_Forensic_Analyst_1.png" alt="AudioPhonoscopy Module" class="concept-img">
+                <p>Визуализация Frey-effect-пайплайна, спектральные водопады, маркеры аномалий</p>
+            </div>
+            
+            <div class="concept-card">
+                <h4>Модуль: Графы связей</h4>
+                <img src="https://femidai.github.io/img/characters/Role_Forensic_Analyst_1.png" alt="Connection Graphs Module" class="concept-img">
+                <p>Молекулярные графы финансовых, коммуникационных, IP и устройственных связей</p>
+            </div>
+            
+            <div class="concept-card">
+                <h4>Модуль: Метаданные и таймлайны</h4>
+                <img src="https://femidai.github.io/img/characters/Role_Forensic_Analyst_1.png" alt="Metadata Timeline Module" class="concept-img">
+                <p>Визуализация лог-файлов, геоданных, временных меток в интерактивном формате</p>
+            </div>
+        </div>
+        
+        <h2 class="court">Надстройка: "Верховный Суд"</h2>
+        <p><strong>Уровень:</strong> Мета-стратегия и финал дел</p>
+        
+        <div class="concept-grid">
+            <div class="concept-card">
+                <h4>Модуль: Судебное заседание (онлайн-ролевая сцена)</h4>
+                <img src="https://femidai.github.io/img/characters/Role_Forensic_Analyst_1.png" alt="Courtroom Online Session" class="concept-img large">
+                <p>Виртуальный зал суда с местами для всех ролей, интерактивной доской доказательств</p>
+            </div>
+            
+            <div class="concept-card">
+                <h4>Модуль: Панель прецедентов и практики</h4>
+                <img src="https://femidai.github.io/img/characters/Role_Forensic_Analyst_1.png" alt="Precedent Panel" class="concept-img">
+                <p>Карточки решений, стандарты доказанности, библиотека юридических материалов</p>
+            </div>
+            
+            <div class="concept-card">
+                <h4>Пакет цифровых доказательств</h4>
+                <img src="https://femidai.github.io/img/characters/Role_Forensic_Analyst_1.png" alt="Evidence Package Visualization" class="concept-img">
+                <p>Визуализация графа + отчёта + метрик достоверности для передачи в суд</p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Секция 3: Роли игроков -->
+    <section class="section" id="roles">
+        <h2>3. Роли игроков и онлайн-взаимодействия</h2>
+        <p>Пример сессии на 6–10 человек с визуальным представлением каждой роли</p>
+        
+        <div class="role-grid">
+            <div class="role-card role-1">
+                <h4>1. Форензик-аналитик (1–2 игрока)</h4>
+                <img src="https://femidai.github.io/img/characters/Role_Forensic_Analyst_1.png" alt="Forensic Analyst" class="concept-img">
+                <p><strong>Интерфейс:</strong> "Цифровой Криминалист"</p>
+                <p><strong>Фокус:</strong> Обработка сигналов, графы, метаданные, качество доказательств</p>
+            </div>
+            
+            <div class="role-card role-2">
+                <h4>2. Опер / следователь</h4>
+                <img src="https://femidai.github.io/img/characters/Role_Forensic_Analyst_1.png" alt="Investigator" class="concept-img">
+                <p><strong>Инструмент:</strong> Карта расследования</p>
+                <p><strong>Функции:</strong> Управление эпизодами, подозреваемыми, источниками, распределение ресурсов</p>
+            </div>
+            
+            <div class="role-card role-3">
+                <h4>3. Прокурор / сторона обвинения</h4>
+                <img src="https://femidai.github.io/img/characters/Role_Forensic_Analyst_1.png" alt="Prosecutor" class="concept-img">
+                <p><strong>Задача:</strong> Сбор линейки обвинения из цифровых блоков</p>
+                <p><strong>Фокус:</strong> Юридическая квалификация, связка "факты → состав преступления"</p>
+            </div>
+            
+            <div class="role-card role-4">
+                <h4>4. Адвокат / сторона защиты</h4>
+                <img src="https://femidai.github.io/img/characters/Role_Forensic_Analyst_1.png" alt="Defense Lawyer" class="concept-img">
+                <p><strong>Задача:</strong> Поиск слабых мест в доказательствах</p>
+                <p><strong>Инструменты:</strong> Проверка цепочки хранения, анализ сомнительных узлов графа</p>
+            </div>
+            
+            <div class="role-card role-5">
+                <h4>5. Судья Верховного уровня</h4>
+                <img src="https://femidai.github.io/img/characters/Role_Forensic_Analyst_1.png" alt="Supreme Judge" class="concept-img">
+                <p><strong>Получает:</strong> Сжатую карту дела (Digital Graph + таймлайн)</p>
+                <p><strong>Функции:</strong> Выбор стандартов оценки, финальное решение, мотивировочная часть</p>
+            </div>
+            
+            <div class="role-card role-6">
+                <h4>6. ИИ-агент "Цифровой Криминалист" (NPC)</h4>
+                <img src="https://femidai.github.io/img/characters/Role_Forensic_Analyst_1.png" alt="AI Agent" class="concept-img">
+                <p><strong>Роли:</strong> Автоподсказчик, контрольный оппонент, заполнение недостающих ролей</p>
+                <p><strong>Визуализация:</strong> Абстрактная, голографическая, "нейросетевая"</p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Секция 4: Игровые циклы -->
+    <section class="section" id="game-loops">
+        <h2>4. Игровые циклы (Game Loop) по ролям</h2>
+        
+        <div class="concept-grid">
+            <div class="concept-card">
+                <h4>Цикл форензик-аналитика</h4>
+                <img src="https://femidai.github.io/img/characters/Role_Forensic_Analyst_1.png" alt="Forensic Analyst Loop" class="concept-img">
+                <p>1. Получение сырого материала → 2. Выбор pipeline → 3. Маркировка узлов графа → 4. Отправка пакета доказательств</p>
+            </div>
+            
+            <div class="concept-card">
+                <h4>Цикл следователя</h4>
+                <img src="https://femidai.github.io/img/characters/Role_Forensic_Analyst_1.png" alt="Investigator Loop" class="concept-img">
+                <p>1. Получение новых узлов → 2. Решение о развитии веток → 3. Управление временем и ресурсами</p>
+            </div>
+            
+            <div class="concept-card">
+                <h4>Цикл прокуратуры / защиты</h4>
+                <img src="https://femidai.github.io/img/characters/Role_Forensic_Analyst_1.png" alt="Prosecution Defense Loop" class="concept-img">
+                <p>1. Сбор линии обвинения/защиты → 2. Формирование вопросов в суд → 3. Подготовка к заседанию</p>
+            </div>
+        </div>
+        
+        <div class="concept-card" style="margin-top: 1.5rem;">
+            <h4>Цикл "Верховного Суда" (мультиплеерное заседание)</h4>
+            <img src="https://femidai.github.io/img/characters/Role_Forensic_Analyst_1.png" alt="Supreme Court Session Loop" class="concept-img large">
+            <p>1. Получение сжатой карты дела → 2. Мультиплеерное заседание (очередь ходов) → 3. Интерактивная работа с узлами → 4. Формирование решения и оценка работы</p>
+        </div>
+    </section>
+    
+    <!-- Секция 5: Механики данных -->
+    <section class="section" id="data-mechanics">
+        <h2>5. Механики данных: Графы, спектры, Git-ветки доказательств</h2>
+        
+        <div class="concept-grid">
+            <div class="concept-card">
+                <h4>Digital Graph как центральный объект</h4>
+                <img src="https://femidai.github.io/img/characters/Role_Forensic_Analyst_1.png" alt="Digital Graph" class="concept-img">
+                <p><strong>Узлы:</strong> События, записи, метаданные, свидетельства, экспертизы</p>
+                <p><strong>Рёбра:</strong> Каузальные связи, подтверждение, конфликт/опровержение</p>
+                <p><strong>Визуальные атрибуты:</strong> Вес достоверности (0-1), цвет источника, размер значимости</p>
+            </div>
+            
+            <div class="concept-card">
+                <h4>Git-ветки доказательств</h4>
+                <img src="https://femidai.github.io/img/characters/Role_Forensic_Analyst_1.png" alt="Git Evidence Branches" class="concept-img">
+                <p>Визуализация коммитов, диффов, истории изменений доказательств</p>
+                <p>Возможность отката к предыдущим версиям анализа, обсуждение спорных коммитов</p>
+            </div>
+            
+            <div class="concept-card">
+                <h4>Спектральные и временные механики</h4>
+                <img src="https://femidai.github.io/img/characters/Role_Forensic_Analyst_1.png" alt="Spectral Waterfall" class="concept-img">
+                <p>Аудио-сцены в реальном времени с маркерами: "подозрительный участок", "инфразвуковой след"</p>
+                <p>Интерактивное выделение участков, влияние на вес узлов графа</p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Секция 6: Технический скелет -->
+    <section class="section" id="technical">
+        <h2>6. Технический скелет под браузер</h2>
+        
+        <h4>Технологический стек (визуализация архитектуры)</h4>
+        <img src="https://femidai.github.io/img/characters/Role_Forensic_Analyst_1.png" alt="Technical Architecture" class="concept-img large">
+        
+        <h4>Слои интерфейса</h4>
+        <div class="concept-grid">
+            <div class="concept-card">
+                <h4>Desktop HUD</h4>
+                <img src="https://femidai.github.io/img/characters/Role_Forensic_Analyst_1.png" alt="Desktop HUD" class="concept-img">
+                <p>Панели сцен (комикс-кадры, карты, графы), навигация, инструменты управления</p>
+            </div>
+            
+            <div class="concept-card">
+                <h4>Immersive режим</h4>
+                <img src="https://femidai.github.io/img/characters/Role_Forensic_Analyst_1.png" alt="Immersive Mode" class="concept-img">
+                <p>Полноэкранная лаборатория / зал суда с параллаксом и 3D-элементами</p>
+            </div>
+            
+            <div class="concept-card">
+                <h4>Адаптивный UI (планшет/телефон)</h4>
+                <img src="https://femidai.github.io/img/characters/Role_Forensic_Analyst_1.png" alt="Mobile Adaptive UI" class="concept-img">
+                <p>Упрощенный HUD для планшета, просмотр графов на телефоне, участие как "присяжный"</p>
+            </div>
+        </div>
+        
+        <h4>Уровни графики</h4>
+        <div class="concept-grid">
+            <div class="concept-card">
+                <h4>Режим "Lite"</h4>
+                <p>Статичные SVG/Canvas-графы и спектрограммы для слабых устройств</p>
+                <img src="https://femidai.github.io/img/characters/Role_Forensic_Analyst_1.png" alt="Graphics Lite Mode" class="concept-img">
+            </div>
+            
+            <div class="concept-card">
+                <h4>Режим "Pro"</h4>
+                <p>WebGL/WebGPU с плавной анимацией, depth-of-field, bloom-эффектами</p>
+                <img src="https://femidai.github.io/img/characters/Role_Forensic_Analyst_1.png" alt="Graphics Pro Mode" class="concept-img">
+            </div>
+        </div>
+    </section>
+    
+    <!-- Секция 7: Режимы игры -->
+    <section class="section" id="game-modes">
+        <h2>7. Режимы сложности и доступность</h2>
+        
+        <div class="game-mode">
+            <div class="mode-card">
+                <h4>1. Учебный сценарий</h4>
+                <img src="https://femidai.github.io/img/characters/Role_Forensic_Analyst_1.png" alt="Tutorial Scenario" class="concept-img">
+                <p>Предзаданные кейсы (Frey effect, deepfake-звонки, фишинг) с пошаговыми подсказками от ИИ</p>
+                <p><strong>Визуальные элементы:</strong> Подсветка активных элементов, всплывающие подсказки, визуальные маркеры последовательности действий</p>
+            </div>
+            
+            <div class="mode-card">
+                <h4>2. Соревновательный режим</h4>
+                <img src="https://femidai.github.io/img/characters/Role_Forensic_Analyst_1.png" alt="Competitive Mode" class="concept-img">
+                <p>Две команды ведут параллельные версии дела с разной информацией, сталкиваются в "Верховном Суде"</p>
+                <p><strong>Визуальные элементы:</strong> Сплит-скрин интерфейсов команд, индикаторы прогресса, таймеры, таблицы результатов</p>
+            </div>
+            
+            <div class="mode-card">
+                <h4>3. Кампания "Национальная система"</h4>
+                <img src="https://femidai.github.io/img/characters/Role_Forensic_Analyst_1.png" alt="National System Campaign" class="concept-img">
+                <p>Роль координатора: настройка стандартов, регламентов, протоколов работы с ИИ, управление лабораториями</p>
+                <p><strong>Визуальные элементы:</strong> Карта системы, графики метрик, панель управления модулями, индикаторы устойчивости системы</p>
+            </div>
+        </div>
+    </section>
+    
+    <footer>
+        <p>Дизайн-документ для проекта "Digital Forensics & Supreme Court Simulator"</p>
+        <p>Все изображения временно заменены на одно тестовое. Для финальной версии замените URL изображений на соответствующие.</p>
+    </footer>
+</body>
+</html>
